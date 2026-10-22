@@ -1,59 +1,42 @@
 # WriteOnQuill
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.3.
+**WriteOnQuill** is a minimalist, browser-based writing and text-sharing application designed for long-form content without character limits.
 
-## Development server
+The project focuses on a clean, distraction-free writing experience, with an emphasis on readable typography, simple interactions, and a polished interface.
 
-To start a local development server, run:
+## Current Status
 
-```bash
-ng serve
-```
+WriteOnQuill is currently a work in progress. The initial interface is in place, and the project is being developed incrementally.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The current prototype includes:
 
-## Code scaffolding
+- A minimalist, responsive interface.
+- A large text editor for writing or pasting long-form content.
+- A notice explaining the prototype's current local-only nature.
+- An interface prepared for future draft-saving functionality.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**Note:** The current prototype does not upload or publish text to a server. Text entered in the editor is not yet saved or shared automatically.
 
-```bash
-ng generate component component-name
-```
+## Tech Stack
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Angular**: Frontend framework.
+- **TypeScript**: Application logic and type safety.
+- **SCSS**: Styling and responsive layout.
+- **Angular Material**: UI component library.
+- **HTML**: Application structure.
 
-```bash
-ng generate --help
-```
+## Roadmap
 
-## Building
+Planned improvements include:
 
-To build the project run:
+- Local draft saving and automatic draft restoration.
+- A clear-draft action.
+- Shareable links for published text.
+- Customisable visual themes or skins.
+- A backend for storing and retrieving published content.
 
-```bash
-ng build
-```
+Features will be introduced progressively as the project develops.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Project Goals
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+WriteOnQuill is a practical frontend development project focused on building a complete application through incremental improvements, component-based architecture, and a consistent user experience.
