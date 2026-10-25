@@ -1,7 +1,5 @@
 import { Component, signal, inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-
-// Adjust paths to match your actual files:
 import { EditorComponent } from './components/editor/editor';
 import { ReaderComponent } from './components/reader/reader';
 import { ShareModalComponent } from './components/share-modal/share-modal';
@@ -23,34 +21,37 @@ export class App implements OnInit {
   shareUrl = signal<string>('');
 
   ngOnInit(): void {
-  if (isPlatformBrowser(this.platformId)) {
-    const params = new URLSearchParams(window.location.search);
-    const sharedDoc = params.get('doc');
+    if (isPlatformBrowser(this.platformId)) {
+      // Check the hash fragment for shared text: #doc=...
+      const hash = window.location.hash;
+      const prefix = '#doc=';
 
-    // Keep the shared link reading capability
-    if (sharedDoc) {
-      try {
-        const decoded = decodeURIComponent(atob(sharedDoc));
-        this.text.set(decoded);
-        this.currentMode.set('read');
-        return;
-      } catch {
-        console.error('Invalid document parameter');
+      if (hash.startsWith(prefix)) {
+        try {
+          const encodedData = hash.substring(prefix.length);
+          const decoded = decodeURIComponent(atob(encodedData));
+          this.text.set(decoded);
+          this.currentMode.set('read');
+          return;
+        } catch (e) {
+          console.error('Could not decode shared document from hash', e);
+        }
       }
-    }
 
-    // Always start with an empty text area on fresh visits/refreshes
-    this.text.set('');
+      // Fresh visit/refresh: start empty
+      this.text.set('');
+    }
   }
-}
 
   saveDraft(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
+    // 1. Save locally in case user stays in this browser
     localStorage.setItem(this.storageKey, this.text());
 
+    // 2. Encode to Base64 and attach as a hash fragment (#doc=...)
     const encoded = btoa(encodeURIComponent(this.text()));
-    const generatedUrl = `${window.location.origin}${window.location.pathname}?doc=${encoded}`;
+    const generatedUrl = `${window.location.origin}${window.location.pathname}#doc=${encoded}`;
     this.shareUrl.set(generatedUrl);
     this.showShareModal.set(true);
   }
@@ -60,19 +61,22 @@ export class App implements OnInit {
   }
 
   openReaderView(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      // Keep the hash in the browser address bar
+      window.location.hash = `doc=${btoa(encodeURIComponent(this.text()))}`;
+    }
     this.showShareModal.set(false);
     this.currentMode.set('read');
   }
 
   startWritingOwn(): void {
-  if (isPlatformBrowser(this.platformId)) {
-    // Remove ?doc=... query param from browser address bar
-    window.history.replaceState({}, '', window.location.pathname);
+    if (isPlatformBrowser(this.platformId)) {
+      // Strip hash from URL bar
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+    this.text.set('');
+    this.currentMode.set('editor');
   }
-  // Ensure the editor starts completely empty for the new writer
-  this.text.set('');
-  this.currentMode.set('editor');
-}
 
   clearText(): void {
     this.text.set('');
