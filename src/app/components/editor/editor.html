@@ -1,0 +1,51 @@
+<header class="site-header">
+  <span class="brand">WriteOnQuill</span>
+  <span class="prototype-label">PROTOTYPE</span>
+</header>
+
+<main class="main-content">
+  <span class="eyebrow">YOUR SPACE FOR WORDS</span>
+  <h1>Write on Quill.</h1>
+
+  <div class="prototype-notice" role="status">
+    <p>This is a prototype editor. Your writing is kept right in your browser session.</p>
+  </div>
+
+  <section class="editor-section">
+    <label class="editor-label" for="text-editor">Your text</label>
+    <textarea
+      id="text-editor"
+      class="text-editor"
+      placeholder="Paste or write your text here..."
+      aria-describedby="editor-help"
+      [ngModel]="text()"
+      (ngModelChange)="text.set($event)"
+    ></textarea>
+
+    <p id="editor-help" class="editor-help">
+      Your words stay in this browser for now.
+    </p>
+
+    <div class="editor-actions">
+      <button
+        class="button-primary"
+        (click)="save.emit()"
+        [disabled]="!text().trim()"
+      >
+        Save & Share
+      </button>
+
+      <button
+        class="button-secondary"
+        (click)="clear.emit()"
+        [disabled]="!text()"
+      >
+        Clear
+      </button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Made for words worth sharing.</p>
+</footer>

@@ -1,0 +1,24 @@
+<div class="reader-shell">
+  <header class="reader-header">
+    <div class="reader-brand">WriteOnQuill</div>
+    <button class="write-another-btn" (click)="writeOwn.emit()">
+      Write on Quill →
+    </button>
+  </header>
+
+  <article class="reader-article">
+    <div class="article-meta">
+      <span>ESSAY</span> • <span>SHARED NOTE</span>
+    </div>
+
+    <div class="article-body">{{ content() }}</div>
+
+    <div class="article-author-card">
+      <div class="author-avatar">Q</div>
+      <div class="author-details">
+        <span class="author-name">Written with WriteOnQuill</span>
+        <span class="author-date">A clean space for words</span>
+      </div>
+    </div>
+  </article>
+</div>

@@ -1,54 +1,24 @@
 <div class="app-shell">
-  <header class="site-header">
-    <a class="brand" href="/" aria-label="WriteOnQuill home">
-      <span class="brand-name">WriteOnQuill</span>
-    </a>
+  @if (currentMode() === 'editor') {
+    <app-editor
+      [(text)]="text"
+      (save)="saveDraft()"
+      (clear)="clearText()"
+    />
+  }
 
-    <span class="prototype-label">Prototype</span>
-  </header>
+  @if (showShareModal()) {
+    <app-share-modal
+      [shareUrl]="shareUrl()"
+      (viewPage)="openReaderView()"
+      (close)="showShareModal.set(false)"
+    />
+  }
 
-  <main class="main-content">
-    <section class="editor-section">
-      <p class="eyebrow">YOUR SPACE FOR WORDS</p>
-
-      <h1>Write on Quill.</h1>
-
-      <p class="intro">
-        Send long texts in style, without worrying about character limits.
-      </p>
-
-      <div class="prototype-notice" role="status">
-        <strong>Prototype notice</strong>
-        <p>
-          This is an experimental prototype. Your texts are stored locally
-          in this browser and are not uploaded to a server. Other people
-          cannot access your saved texts from their own devices.
-        </p>
-      </div>
-
-      <label class="editor-label" for="text-editor">
-        Your text
-      </label>
-
-      <textarea
-        id="text-editor"
-        class="text-editor"
-        placeholder="Paste or write your text here..."
-        aria-describedby="editor-help"
-      ></textarea>
-
-      <p id="editor-help" class="editor-help">
-        Your words stay in this browser for now.
-      </p>
-
-      <div class="editor-actions">
-        <button mat-flat-button disabled>Save locally</button>
-        <button mat-stroked-button disabled>Clear</button>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>Made for words worth sharing.</p>
-  </footer>
+  @if (currentMode() === 'read') {
+    <app-reader
+      [content]="text()"
+      (writeOwn)="startWritingOwn()"
+    />
+  }
 </div>

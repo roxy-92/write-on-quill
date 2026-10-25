@@ -1,0 +1,41 @@
+<div class="modal-backdrop" (click)="close.emit()">
+  <!-- (click)="$event.stopPropagation()" prevents clicks inside the card from closing it -->
+  <div class="share-card" (click)="$event.stopPropagation()">
+    
+    <!-- Top-right close button (✕) -->
+    <button 
+      type="button" 
+      class="btn-close" 
+      aria-label="Close modal" 
+      (click)="close.emit()"
+    >
+      ✕
+    </button>
+
+    <div class="success-icon-wrap">
+      <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <h2 class="share-title">Text ready to share</h2>
+    <p class="share-subtitle">Your writing has been saved and packaged into a link.</p>
+
+    <div class="link-field">
+      <span class="link-icon">🔗</span>
+      <input type="text" readonly [value]="shareUrl()" class="link-input" />
+      <button type="button" class="btn-copy" (click)="copyLink()">
+        {{ copyButtonText() }}
+      </button>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-text-action" (click)="viewPage.emit()">
+        ↗ View text page
+      </button>
+      <button type="button" class="btn-text-action" (click)="close.emit()">
+        ← Keep editing
+      </button>
+    </div>
+  </div>
+</div>
