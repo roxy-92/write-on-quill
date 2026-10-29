@@ -1,0 +1,54 @@
+
+.export-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+
+  button {
+    appearance: none;
+    background: transparent;
+    border: 1px solid #d8d5d0;
+    border-radius: 6px;
+    color: #55514c;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.65rem 1rem;
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &:hover {
+      background: #f5f3ef;
+      border-color: #aaa49b;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #55514c;
+      outline-offset: 3px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .export-actions {
+    gap: 0.5rem;
+
+    button {
+        flex: 1;
+        min-width: 0;
+        padding: 0.65rem 0.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        
+      iconify-icon {
+        font-size: 1rem;
+        flex-shrink: 0;
+        }
+    }
+  }
+}

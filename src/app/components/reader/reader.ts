@@ -1,10 +1,13 @@
+
 import { Component, input, output } from '@angular/core';
+import { ExportComponent } from '../export/export';
 
 @Component({
   selector: 'app-reader',
   standalone: true,
-  templateUrl: './reader.html',    // <-- changed from ./reader.component.html
-  styleUrl: './reader.scss',      // <-- changed from ./reader.component.scss
+  imports: [ExportComponent],
+  templateUrl: './reader.html',
+  styleUrl: './reader.scss',
 })
 export class ReaderComponent {
   content = input.required<string>();
